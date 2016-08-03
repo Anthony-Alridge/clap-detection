@@ -44,7 +44,7 @@ class ClapDetector():
                 block = self.stream.read(self.block*20) #1 second sample
                 rms_values.append(audioop.rms(block, 2))
             except IOError as e:
-                i -= 1
+                print('error: ' + e)
         return max(rms_values)
 
     def clapDetected(self):
@@ -59,7 +59,7 @@ class ClapDetector():
         try:
             block = self.stream.read(self.block)
         except IOError as e:
-            print('error')
+            print('error: ' + e)
             return
         amplitude = audioop.rms(block, 2 )
         if self.block_counter >= self.pattern_limit:
